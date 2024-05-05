@@ -30,8 +30,8 @@ template <typename T>
 class SmartPtr
 {
 public:
-  SmartPtr() : ptr_(nullptr), count_(nullptr){};              // 默认构造函数也要实现,针对的SmartPtr<int> sp这种情况;
-  explict SmartPrt(T *ptr), ptr_(ptr), count_(new Count()){}; // 最好显式explicit声明
+  SmartPtr() : ptr_(nullptr), count_(nullptr){};               // 默认构造函数也要实现,针对的SmartPtr<int> sp这种情况;
+  explicit SmartPtr(T *ptr), ptr_(ptr), count_(new Count()){}; // 最好显式explicit声明
 
   ~SmartPtr()
   {
