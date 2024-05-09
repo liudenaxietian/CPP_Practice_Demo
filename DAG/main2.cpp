@@ -57,12 +57,14 @@ public:
   }
 
 private:
-  void executor(module* mod,unordered_map<string,bool>& visited)
+  void executor(module *mod, unordered_map<string, bool> &visited)
   {
     visited[mod->Name()] = true;
-    for(auto dep:mod->Deps()){
-      if(!visited[dep]){
-        executor(modules_[dep],visited);
+    for (auto dep : mod->Deps())
+    {
+      if (!visited[dep])
+      {
+        executor(modules_[dep], visited);
       }
     }
     mod->executor();
@@ -70,19 +72,18 @@ private:
   unordered_map<string, module *> modules_;
 };
 
-
-int main(){
-  moduleA mA1("A1",{});
-  moduleA mA2("A2",{"A1"});
-  moduleB mB1("B1",{"A1","A2"});
-  moduleA mA3("A3",{"B1"});
+int main()
+{
+  moduleA mA1("A1", {});
+  moduleA mA2("A2", {"A1"});
+  moduleB mB1("B1", {"A1", "A2"});
+  moduleA mA3("A3", {"B1"});
 
   execute e;
   e.add_module(&mA3);
   e.add_module(&mB1);
   e.add_module(&mA1);
   e.add_module(&mA2);
-
 
   e.execute_all();
 
